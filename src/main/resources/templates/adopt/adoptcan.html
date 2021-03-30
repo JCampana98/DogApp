@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout/layout :: head" th:with="title='Adopt'">
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="layout/layout :: navbar"></div>
+	<div class="container jumbotron" style="margin-top: 5%; margin-bottom: 5%;">
+		<div class="row">
+			<div class="col-6">
+				<h2 th:text="${perro.nombre}"></h2>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item" th:text="'Edad: ' + ${perro.edad}">Edad</li>
+					<li class="list-group-item" th:text="'Sexo: ' + ${perro.sexo}">Sexo</li>
+					<li class="list-group-item" th:text="'Tama&ntilde;o: ' + ${perro.tamanio}">Tama&ntilde;o</li>
+					<li class="list-group-item" th:text="'Raza: ' + ${perro.raza}">Raza</li>
+					<li class="list-group-item"><i th:if="${perro.entrenado == 1}" style="color: blue;" class="fas fa-award fa-2x" data-toggle="tooltip" data-placement="top" title="Entrenado"></i> <i
+						th:if="${perro.entrenado == 0}" style="color: grey;" class="fas fa-award fa-2x" data-toggle="tooltip" data-placement="top" title="No Entrenado"></i> <i th:if="${perro.aptoPerros == 1}"
+						style="color: brown;" class="fas fa-paw fa-2x" data-toggle="tooltip" data-placement="top" title="Apto Perros"></i> <i th:if="${perro.aptoPerros == 0}" style="color: grey;"
+						class="fas fa-paw fa-2x" data-toggle="tooltip" data-placement="top" title="'No Apto Perros"></i> <i th:if="${perro.aptoNinios == 1}" style="color: #ff8803;" class="fas fa-child fa-2x"
+						data-toggle="tooltip" data-placement="top" title="Apto Ni&ntilde;os"></i> <i th:if="${perro.aptoNinios == 0}" style="color: grey;" class="fas fa-child fa-2x" data-toggle="tooltip"
+						data-placement="top" title="No Apto Ni&ntilde;os"></i> <i th:if="${perro.esterilizado == 1}" style="color: #45db28;" class="fas fa-syringe fa-2x" data-toggle="tooltip" data-placement="top"
+						title="Esterilizado"></i> <i th:if="${perro.esterilizado == 0}" style="color: grey;'" class="fas fa-syringe fa-2x" data-toggle="tooltip" data-placement="top" title="No Esterilizado"></i></li>
+				</ul>
+			</div>
+			<div class="col-6">
+				<div id="carouselIndicators" class="carousel slide" data-ride="carousel">
+					<ol class="carousel-indicators">
+						<th:block th:each="imagen, rowStat : ${imagenes}">
+							<li data-target="#carouselIndicators" th:attr="data-slide-to=${rowStat.index}" class=""></li>
+						</th:block>
+					</ol>
+					<div class="carousel-inner">
+						<div th:each="imagen, iStat : ${imagenes}" th:class="${iStat.first}? 'carousel-item active': 'carousel-item'">
+							<img class="img-fluid" th:src="${imagen.url}" alt="adopt">
+						</div>
+					</div>
+					<a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span>
+					</a> <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="row" style="margin-top: 2%;">
+			<div class="col-md-12">
+				<div>
+					<h5 class="text-muted">Descripcion:</h5>
+					<p th:text="${perro.descripcion}"></p>
+				</div>
+				<h2>Responsabilidades de Adoptar un Perro</h2>
+				<p>Etiam fermentum porttitor enim. Vivamus imperdiet erat quis arcu malesuada, vel gravida mi fringilla. In vulputate nunc metus, et mollis est interdum eget. Nulla justo libero, facilisis non
+					facilisis quis, accumsan sit amet urna. Proin felis purus, ultricies a mi id, pharetra gravida elit. Donec massa magna, bibendum et ex nec, ultricies scelerisque neque. Maecenas viverra lobortis
+					mi. Sed ante nisi, mollis sit amet eros non, ullamcorper efficitur orci. Suspendisse malesuada sem vitae diam placerat, non facilisis sapien feugiat. In hac habitasse platea dictumst.
+					Pellentesque risus orci, lobortis vitae hendrerit vel, feugiat nec arcu. Sed ac nibh ligula. Vivamus venenatis ac velit id tempus.</p>
+				<button href="#vacunas" class="btn btn-primary btn-lg" data-toggle="modal">Ver Vacunas</button>
+			</div>
+		</div>
+	</div>
+	<div style="margin-top: 5%" class="modal fade" id="vacunas" tabindex="-1" role="dialog" aria-labelledby="vacunasLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="vacunasLabel">Vacunas</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div th:if="${#lists.isEmpty(perro.vacunaciones)}">
+						<div class="text-center">
+							<button class="btn btn-warning btn-lg"><i class="fas fa-syringe fa-3x"style="color: red"></i><h2>Este can no esta vacunado</h2></button>
+						</div>
+					</div>
+					<table th:unless="${#lists.isEmpty(perro.vacunaciones)}" class="table table-hover">
+						<thead>
+							<tr>
+								<th>Nombre de la Vacuna</th>
+								<th>Fecha</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="vac : ${perro.vacunaciones}">
+								<td th:text="${vac.vacuna.nombre}"></td>
+								<td th:text="${vac.fecha}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="layout/layout :: footer"></div>
+	<div th:replace="layout/layout :: js"></div>
+</body>
+</html>

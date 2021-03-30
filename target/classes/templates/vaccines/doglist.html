@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout/layout :: head" th:with="title='Adopt'">
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="layout/layout :: navbar"></div>
+	<div class="container jumbotron" style="margin-top: 5%; margin-bottom: 5%;">
+		<div class="row">
+			<div class="col-12">
+				<h2>Listado Perros Vacunados: <span th:text="${vacuna.nombre}" style="font-weight: bolder;"></span></h2>
+			</div>
+		</div>
+		<div class="row" th:unless="${#lists.isEmpty(vacunacion)}">
+			<table class="table" style="margin-top: 2%;">
+				<thead class="table-dark">
+					<tr>
+						<th>Nombre</th>
+						<th>Sexo</th>
+						<th>Edad</th>
+						<th>Tama&ntilde;o</th>
+						<th>Raza</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="vac : ${vacunacion}">
+						<td><a class="button btn btn-primary" th:href="@{adoptcan.html(id=${vac.perro.perroId})}" th:text="${vac.perro.nombre}">Nombre</a></td>
+						<td th:text="${vac.perro.sexo}">Sexo</td>
+						<td th:text="${vac.perro.edad}">Edad</td>
+						<td th:text="${vac.perro.tamanio}">Tama&ntilde;o</td>
+						<td th:text="${vac.perro.raza}">Raza</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div th:if="${#lists.isEmpty(vacunacion)}">
+		<br><br>
+			<div class="text-center">
+				<button class="btn btn-warning btn-lg"><i class="fas fa-syringe fa-3x"style="color: red"></i><h2>No hay perros vacunados</h2></button>
+			</div>
+		</div>
+	</div>
+	<div th:replace="layout/layout :: footer"></div>
+	<div th:include="layout/layout :: js"></div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout/layout :: head" th:with="title='Adopt'">
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="layout/layout :: navbar"></div>
+	<div class="container jumbotron" style="margin-top: 5%; margin-bottom: 5%;">
+		<div class="row">
+			<div class="col-12">
+				<h2>Listado de Vacunas</h2>
+			</div>
+		</div>
+		<div class="row">
+			<table class="table table-hover" style="margin-top: 2%;">
+				<thead class="table-dark">
+					<tr>
+						<th>Nombre de la Vacuna</th>
+						<th>Lista de Perros</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="vacuna : ${vacunas}">
+						<td th:text="${vacuna.nombre}"></td>
+						<td><a class="btn btn-primary" th:href="@{doglist.html(id=${vacuna.vacunaId})}"><i class="fas fa-eye"></i> Lista de perros</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div th:replace="layout/layout :: footer"></div>
+	<div th:replace="layout/layout :: js"></div>
+</body>
+</html>

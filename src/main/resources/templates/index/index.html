@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout/layout :: head" th:with="title='Inicio'">
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="layout/layout :: navbar"></div>
+	<div class="container-fluid" style="margin-top: 5%; margin-bottom: 5%;">
+		<div class="row">
+			<div class="col-lg-2"></div>
+			<div class="col-lg-8">
+				<div id="carouselIndicators" class="carousel slide" data-ride="carousel">
+					<ol class="carousel-indicators">
+					    <th:block th:each="slide, rowStat : ${slides}">
+					        <li data-target="#carouselIndicators" th:attr="data-slide-to=${rowStat.index}" class=""></li>
+					    </th:block>
+					</ol>
+					<div class="carousel-inner">
+						<div th:each="slide, iStat : ${slides}" th:class="${iStat.first}? 'carousel-item active': 'carousel-item'">
+							<a th:href="${slide.ref}" ><img class="img-fluid" th:src="${slide.url}" alt="adopt"></a>
+							<div class="carousel-caption d-none d-md-block">
+								<h2>
+									<kbd>
+										<strong th:text="${slide.title}">Titulo</strong>
+									</kbd>
+								</h2>
+								<p>
+									<kbd th:text="${slide.content}">Contenido</kbd>
+								</p>
+							</div>
+						</div>
+					</div>
+					<a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
+				        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				        <span class="sr-only">Previous</span>
+				    </a>
+				    <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
+				        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+				        <span class="sr-only">Next</span>
+				    </a>
+				</div>
+			</div>
+			<div class="col-lg-2"></div>
+		</div>
+	</div>
+	<div th:replace="layout/layout :: footer"></div>
+	<div th:replace="layout/layout :: js"></div>
+</body>
+</html>

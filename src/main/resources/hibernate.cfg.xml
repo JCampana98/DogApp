@@ -1,0 +1,28 @@
+
+<hibernate-configuration>
+	<session-factory>
+		<property name="connection.driver_class">
+			com.mysql.cj.jdbc.Driver
+		</property>
+		<property name="connection.url">
+			jdbc:mysql://localhost/dogsupport?useSSL=false
+		</property>
+		<property name="connection.user">
+			root
+		</property>
+		<property name="connection.password">
+			Campana12
+		</property>
+		<property name="connection.pool_size">
+			10
+		</property>
+		<property name="dialect">
+			org.hibernate.dialect.MySQLDialect
+		</property>
+		<mapping class="ar.edu.um.disenio.dogsupport.entity.Cliente"/>
+		<mapping class="ar.edu.um.disenio.dogsupport.entity.Usuario"/>
+		<mapping class="ar.edu.um.disenio.dogsupport.entity.Perro"/>
+		<mapping class="ar.edu.um.disenio.dogsupport.entity.Vacuna"/>
+		<mapping class="ar.edu.um.disenio.dogsupport.entity.Solicitud"/>
+	</session-factory>
+</hibernate-configuration>

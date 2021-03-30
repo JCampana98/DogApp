@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout/layout :: head" th:with="title='Adopt'">
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="layout/layout :: navbar"></div>
+	<div class="container-fluid" style="margin-top: 5%; margin-bottom: 5%;">
+		<div class="row">
+			<div class="col-1"></div>
+			<div class="col-11">
+				<h1>
+				  Perros en Adopcion
+				  <small class="text-muted">Ayudanos a ayudarlos!</small>
+				</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<form class="form-inline float-right alert alert-dark" th:action="@{search.html}" method="GET">
+					<div class="form-group">
+						<label for="nombre">Nombre del Perro: </label> <input type="text" class="form-control" pattern="[A-Za-z]{1-50}" name="nombre" id="nombre">
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-sm btn-primary">
+							<span class="fas fa-search" aria-hidden="true"></span> Buscar
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="row jumbotron">
+			<div th:each="perro : ${perros}" class='col-md-3'>
+				<div class="card d-block">
+					<img class="card-img-top img-fluid" th:src="${perro.fotoperfil}" th:alt="${perro.nombre}">
+					<div class="card-body">
+						<h5 class="card-title" th:text="${perro.nombre}"></h5>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item" th:text="'Edad: ' + ${perro.edad}">Edad</li>
+							<li class="list-group-item" th:text="'Sexo: ' + ${perro.sexo}">Sexo</li>
+							<li class="list-group-item" th:text="'Tama&ntilde;o: ' + ${perro.tamanio}">Tama&ntilde;o</li>
+							<li class="list-group-item" th:text="'Raza: ' + ${perro.raza}">Raza</li>
+						</ul>
+					</div>
+					<div class="card-footer">
+						<i th:if="${perro.entrenado == 1}" style="color: blue;" class="fas fa-award fa-2x" data-toggle="tooltip" data-placement="top" title="Entrenado"></i> 
+						<i th:if="${perro.entrenado == 0}" style="color: grey;" class="fas fa-award fa-2x" data-toggle="tooltip" data-placement="top" title="No Entrenado"></i> 
+						<i th:if="${perro.aptoPerros == 1}" style="color: brown;" class="fas fa-paw fa-2x" data-toggle="tooltip" data-placement="top" title="Apto Perros"></i> 
+						<i th:if="${perro.aptoPerros == 0}" style="color: grey;" class="fas fa-paw fa-2x" data-toggle="tooltip" data-placement="top" title="'No Apto Perros"></i> 
+						<i th:if="${perro.aptoNinios == 1}" style="color: #ff8803;" class="fas fa-child fa-2x" data-toggle="tooltip" data-placement="top" title="Apto Ni&ntilde;os"></i> 
+						<i th:if="${perro.aptoNinios == 0}" style="color: grey;" class="fas fa-child fa-2x" data-toggle="tooltip" data-placement="top" title="No Apto Ni&ntilde;os"></i> 
+						<i th:if="${perro.esterilizado == 1}" style="color: #45db28;" class="fas fa-syringe fa-2x" data-toggle="tooltip" data-placement="top" title="Esterilizado"></i> 
+						<i th:if="${perro.esterilizado == 0}" style="color: grey;'" class="fas fa-syringe fa-2x" data-toggle="tooltip" data-placement="top" title="No Esterilizado"></i> 
+						<a class="btn btn-primary float-right" th:href="@{adoptcan.html(id=${perro.perroId})}">Adoptar</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="layout/layout :: footer"></div>
+	<div th:replace="layout/layout :: js"></div>
+</body>
+</html>

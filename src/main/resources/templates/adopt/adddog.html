@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout/layout :: head" th:with="title='Adopt'">
+<meta charset="UTF-8">
+</head>
+<body>
+
+	<div th:replace="layout/layout :: navbar"></div>
+	
+	<div class="container-fluid" style="margin-top: 5%">
+		<div class="row">
+			<div class="col-md-3"> </div>
+			<div class="col-md-6 jumbotron"> 
+				<form class="form" role="form" autocomplete="off" th:object="${perro}" th:action="@{adddog.html}" method="POST">
+					<div class="form-row mt-4">
+						<div class="col-sm-12 pb-3">
+							<h4>Datos del Can</h4>
+						</div>
+						<div class="col-sm-6 pb-3">
+							<label for="nombre">Nombre del Can</label> <input type="text" class="form-control" id="nombreP" name="nombreP" placeholder="Ingrese su nombre..." th:required="required">
+						</div>
+						<div class="col-sm-3 pb-3">
+							<label for="tamanio">Tamaño</label> <select class="form-control" id="tamanio" name="tamanio" th:required="required">
+								<option value="Pequeño">Peque&ntilde;o</option>
+								<option value="Mediano">Mediano</option>
+								<option value="Grande">Grande</option>
+							</select>
+						</div>
+						<div class="col-sm-3 pb-3">
+							<label for="sexo">Sexo</label> <select class="form-control" id="sexo" name="sexo" th:required="required">
+								<option value="Macho">Masculino</option>
+								<option value="Hembra">Femenino</option>
+							</select>
+						</div>
+						<div class="col-sm-3 pb-3">
+							<label for="raza">Raza</label> <input type="text" class="form-control" id="raza" name="raza" placeholder="Ingrese su raza..." th:required="required">
+						</div>
+						<div class="col-sm-3 pb-3">
+							<label for="edad">Edad</label> <select class="form-control" id="edad" name="edad" th:required="required">
+								<option value="Cachorro">Cachorro</option>
+								<option value="Joven">Joven</option>
+								<option value="Adulto">Adulto</option>
+								<option value="Anciano">Anciano</option>
+							</select>
+						</div>
+						<div class="col-md-6 pb-3">
+							<label for="exampleMessage">Descripción</label>
+							<textarea class="form-control" id="exampleMessage" name="descripcion"></textarea>
+							<small class="text-info"> Añada información adicional sobre el can en adopcion. </small>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="true" id="aptoPerros" name="aptoPerros"> <label class="form-check-label" for="aptoPerros"> Se lleva bien con otros perros </label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="true" id="aptoNinios" name="aptoNinios"> <label class="form-check-label" for="aptoNinios"> Se lleva bien con niños </label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="true" id="Esterilizado" name="Esterilizado"> <label class="form-check-label" for="Esterilizado">Esterilizado/a</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="true" id="entrenado" name="entrenado"> <label class="form-check-label" for="entrenado">Entrenado/a</label>
+							</div>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-success btn-lg float-right" id="btnDar">Dar en Adopcion</button>
+				</form>
+			</div>
+			<div class="col-md-3"> </div>
+		</div>
+	</div>
+	
+	<div th:replace="layout/layout :: footer"></div>
+	
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout/layout :: head" th:with="title='Adopt'">
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="layout/layout :: navbar"></div>
+	<div class="container-fluid" style="margin-top: 5%">
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<div class="text-center">
+					<img src="/images/saddog.png" class="rounded mx-auto d-block" alt="...">
+				</div>
+				<h2 class="text-center">
+					<br>
+					No se encuentra la pagina que esta buscando
+				</h2>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</div>
+	<div th:replace="layout/layout :: footer"></div>
+</body>
+</html>
